@@ -4,9 +4,9 @@ public class MenuManager : MonoBehaviour
 {
     public SceneTransition transition;
 
-    public void NewGame() 
+    public void NewGame()
     {
-        transition.LoadScene("01_Mysterious Forest");
+        transition.LoadScene("School");
     }
 
     public void ContinueGame()
