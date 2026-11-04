@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-	public float mouseSensitivity = 1000f;
+    public float mouseSensitivity = 100f;
+    public Transform playerBody;
 
-	public Transform playerBody;
+    private float xRotation = 0f;
 
-	private float xRotation;
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
-	private void Start()
-	{
-		Cursor.lockState = CursorLockMode.Locked;
-	}
+    void Update()
+    {
+        float mouseX = Input.GetAxis("Mouse X")
+            * mouseSensitivity * Time.deltaTime;
 
-	private void Update()
-	{
-		float num = Input.GetAxis("Mouse X") * mouseSensitivity;
-		float num2 = Input.GetAxis("Mouse Y") * mouseSensitivity;
-		xRotation -= num2;
-		xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-		transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-		playerBody.Rotate(Vector3.up * num);
-	}
+        float mouseY = Input.GetAxis("Mouse Y")
+            * mouseSensitivity * Time.deltaTime;
+
+        // Look up and down
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        transform.localRotation =
+            Quaternion.Euler(xRotation, 0f, 0f);
+
+        // Look left and right
+        playerBody.Rotate(Vector3.up * mouseX, Space.Self);
+    }
 }
