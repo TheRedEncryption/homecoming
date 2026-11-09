@@ -5,7 +5,8 @@ using UnityEngine.AI;
 public enum EnemyState 
 {
     Patrolling,
-    Following
+    Following,
+    Stunned
 }
 
 public class EnemyController : MonoBehaviour
@@ -27,6 +28,7 @@ public class EnemyController : MonoBehaviour
     private bool _isWaiting;
     private EnemyState _state = EnemyState.Patrolling;
     private float _timeSinceLostPlayer;
+    private float _stunTime = 0f;
 
     private void Awake()
     {
@@ -72,9 +74,18 @@ public class EnemyController : MonoBehaviour
                 }
 
                 break;
+            
+            case EnemyState.Stunned:
+                // TODO: implement stunning
+                break;
         }
 
         
+    }
+
+    public void GetStunned()
+    {
+        // TODO: implement
     }
 
     private void FollowPlayer()
