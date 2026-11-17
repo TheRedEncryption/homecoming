@@ -529,7 +529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aee40f58d3ed0043bf570e5a16f1eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
-  transition: {fileID: 1637963898}
   transitionTime: 1
 --- !u!1 &985625109
 GameObject:
@@ -831,6 +830,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
   transition: {fileID: 771990144}
+  gameSceneName: SliceTest
+  optionsSceneName: Options
+  creditsSceneName: Credits
 --- !u!4 &1259747894
 Transform:
   m_ObjectHideFlags: 0
