@@ -3,10 +3,13 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public SceneTransition transition;
+    [SerializeField] private string gameSceneName = "School";
+    [SerializeField] private string optionsSceneName = "Options";
+    [SerializeField] private string creditsSceneName = "Credits";
 
     public void NewGame()
     {
-        transition.LoadScene("School");
+        transition.LoadScene(gameSceneName);
     }
 
     public void ContinueGame()
@@ -19,11 +22,11 @@ public class MenuManager : MonoBehaviour
     }
     public void Options()
     {
-        SceneManager.LoadScene("Options");
+        SceneManager.LoadScene(optionsSceneName);
     }
     public void Credits()
     {
-        SceneManager.LoadScene("Credits");
+        SceneManager.LoadScene(creditsSceneName);
     }
     public void QuitGame()
     {
