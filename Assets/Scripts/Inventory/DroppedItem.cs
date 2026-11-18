@@ -36,4 +36,21 @@ public class DroppedItem : MonoBehaviour
         yield return new WaitForSeconds(delay);
         GetComponent<Collider>().enabled = true;
     }
+
+    public void ApplyCollectionEffect(GameObject player) 
+    {
+        if (item == null || player == null)
+            return;
+
+        PlayerStatusEffects statusEffects = 
+            player.GetComponent<PlayerStatusEffects>();
+
+        if (statusEffects == null) 
+        {
+            Debug.LogWarning("PlayerStatusEffects not found!");
+                return;
+        }
+
+        statusEffects.ApplyEffect(item);
+    }
 }

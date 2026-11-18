@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: NoteItem
   m_EditorClassIdentifier: Assembly-CSharp::Item
   id: Note_01
-  description: Piece of evidence
+  description: Speed Up
   icon: {fileID: 0}
   prefab: {fileID: 1150162537982110924, guid: af6ad181a816d504597f10557a10b873, type: 3}
+  collectionEffect: 1
+  effectAmount: 0.5
