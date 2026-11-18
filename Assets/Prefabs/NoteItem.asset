@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c59232379b43844c84528a7de7ec525, type: 3}
-  m_Name: Note
+  m_Name: NoteItem
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  id: Note
-  description: A note
+  id: Note_01
+  description: Piece of evidence
   icon: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 1150162537982110924, guid: af6ad181a816d504597f10557a10b873, type: 3}

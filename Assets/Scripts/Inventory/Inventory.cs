@@ -29,17 +29,40 @@ public class Inventory : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Touched: " + other.name + " | Tag: " + other.tag);
+
         if (other.CompareTag("DroppedItem"))
         {
-            var droppedItem = other.GetComponent<DroppedItem>();
-            if (droppedItem.pickedUp)
+            Debug.Log("DroppedItem tag detected!");
+
+            DroppedItem droppedItem = other.GetComponent<DroppedItem>();
+
+            if (droppedItem == null)
             {
+                Debug.LogError("DroppedItem script is missing!");
                 return;
             }
+
+            if (droppedItem.pickedUp)
+            {
+                Debug.LogWarning("Item already marked as picked up!");
+                return;
+            }
+
+            if (droppedItem.item == null)
+            {
+                Debug.LogError("No Item assigned to DroppedItem!");
+                return;
+            }
+
+            Debug.Log("Collecting: " + droppedItem.item.id);
+
             droppedItem.pickedUp = true;
             AddItem(droppedItem.item);
+
             Destroy(other.gameObject);
-            audioSource.PlayOneShot(pickUpItemAudio);
+
+            Debug.Log("Pickup processed!");
         }
     }
 
