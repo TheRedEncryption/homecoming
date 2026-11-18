@@ -60,8 +60,6 @@ public class Inventory : MonoBehaviour
             droppedItem.pickedUp = true;
             AddItem(droppedItem.item);
 
-            droppedItem.ApplyCollectionEffect(gameObject);
-
             Destroy(other.gameObject);
 
             Debug.Log("Pickup processed!");
