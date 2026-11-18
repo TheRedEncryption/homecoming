@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
 
 
     private NavMeshAgent _agent;
+    private float originalSpeed;
     private int _currentPatrolIndex;
     private bool _isWaiting;
     private EnemyState _state = EnemyState.Patrolling;
@@ -34,11 +35,26 @@ public class EnemyController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
 
+        originalSpeed = _agent.speed;
+
+        _agent.speed = originalSpeed *
+            EnemySlow.GlobalSpeedMultiplier;
+
+        UpdateEnemySpeed();
+
     }
 
     private void Start()
     {
         GoToNextPatrolPoint();
+    }
+
+    public void UpdateEnemySpeed() 
+    {
+        if (_agent == null) return;
+
+        _agent.speed = originalSpeed *
+            EnemySlow.GlobalSpeedMultiplier;
     }
 
     private void Update()

@@ -17,4 +17,4 @@ MonoBehaviour:
   icon: {fileID: 0}
   prefab: {fileID: 1150162537982110924, guid: af6ad181a816d504597f10557a10b873, type: 3}
   collectionEffect: 3
-  effectAmount: 0.1
+  effectAmount: 0.3

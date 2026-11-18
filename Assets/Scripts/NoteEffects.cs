@@ -7,6 +7,8 @@ public class PlayerStatusEffects : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
+    [SerializeField] private TunnelVision tunnelVision;
+
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -38,6 +40,7 @@ public class PlayerStatusEffects : MonoBehaviour
                 break;
 
             case CollectionEffect.EnemySlow:
+                EnemySlow.ApplyGlobalSlow(item.effectAmount);
                 Debug.Log("Enemy slow effect collected.");
                 break;
 
@@ -50,7 +53,16 @@ public class PlayerStatusEffects : MonoBehaviour
                 break;
 
             case CollectionEffect.LimitVision:
-                Debug.Log("Limited vision effect collected.");
+                if (tunnelVision != null) 
+                {
+                    tunnelVision.ActivateTunnelVision();
+                    Debug.Log("Limited vision effect collected.");
+                }
+                else
+                {
+                    Debug.LogError("Tunnel Vision reference missing!");
+                }
+                
                 break;
         }
     }
