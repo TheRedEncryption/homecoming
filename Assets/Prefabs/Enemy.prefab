@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6647084460655286774}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbde50a7f2d2884aa5db6ca5154dd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  player: {fileID: 0}
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -161,3 +162,7 @@ MonoBehaviour:
   - {fileID: 0}
   patrolWaitTime: 2
   stopAtDistance: 0.5
+  detectionRange: 5
+  viewAngle: 90
+  losePlayerTime: 3
+  stunnedTime: 5

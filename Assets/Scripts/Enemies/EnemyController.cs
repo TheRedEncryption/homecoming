@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float detectionRange = 5f;
     [SerializeField] private float viewAngle = 90f;
     [SerializeField] private float losePlayerTime = 3f;
+    [SerializeField] private float stunnedTime = 5f;
 
 
     private NavMeshAgent _agent;
@@ -29,11 +30,12 @@ public class EnemyController : MonoBehaviour
     private EnemyState _state = EnemyState.Patrolling;
     private float _timeSinceLostPlayer;
     private float _stunTime = 0f;
+    private float _speed;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-
+        _speed = _agent.speed;
     }
 
     private void Start()
@@ -76,7 +78,16 @@ public class EnemyController : MonoBehaviour
                 break;
             
             case EnemyState.Stunned:
-                // TODO: implement stunning
+                Debug.Log("STUN: " + _stunTime);
+                if (_stunTime < 0f)
+                {
+                    _state = EnemyState.Patrolling;
+                    _agent.speed = _speed;
+                }
+                else
+                {
+                    _stunTime -= Time.deltaTime;
+                }
                 break;
         }
 
@@ -85,7 +96,9 @@ public class EnemyController : MonoBehaviour
 
     public void GetStunned()
     {
-        // TODO: implement
+        _stunTime = stunnedTime;
+        _state = EnemyState.Stunned;
+        _agent.speed = 0f;
     }
 
     private void FollowPlayer()
