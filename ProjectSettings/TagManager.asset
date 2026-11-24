@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - DroppedItem
+  - Door
   layers:
   - Default
   - TransparentFX
