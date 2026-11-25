@@ -36,6 +36,9 @@ public class PlayerStatusEffects : MonoBehaviour
                 break;
 
             case CollectionEffect.EnemyAggression:
+
+                EnemyAggression.ApplyGlobalAggression(
+                    item.effectAmount);
                 Debug.Log("Enemy aggression effect collected.");
                 break;
 
