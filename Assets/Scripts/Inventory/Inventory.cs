@@ -60,6 +60,8 @@ public class Inventory : MonoBehaviour
             droppedItem.pickedUp = true;
             AddItem(droppedItem.item);
 
+            droppedItem.ApplyCollectionEffect(gameObject);
+
             Destroy(other.gameObject);
 
             Debug.Log("Pickup processed!");
@@ -71,6 +73,18 @@ public class Inventory : MonoBehaviour
         var inventoryId = Guid.NewGuid().ToString();
         inventory.Add(inventoryId, item);
         ui.AddUIItem(inventoryId, item);
+
+        switch (item.collectionEffect)
+        {
+            case CollectionEffect.EnemySlow:
+                EnemySlow.ApplyGlobalSlow(item.effectAmount);
+                Debug.Log("Enemy Slow activated!");
+                break;
+
+            case CollectionEffect.None:
+                break;
+        }
+
     }
 
     public void DropItem(string inventoryId)

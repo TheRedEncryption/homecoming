@@ -19,8 +19,6 @@ public class PauseMenu : MonoBehaviour
         pauseUI.SetActive(true);
         Time.timeScale = 0f;   // Freeze gameplay
         isPaused = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     public void Resume()
@@ -28,8 +26,6 @@ public class PauseMenu : MonoBehaviour
         pauseUI.SetActive(false);
         Time.timeScale = 1f;   // Resume gameplay
         isPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 }
 
