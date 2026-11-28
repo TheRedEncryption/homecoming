@@ -10,7 +10,16 @@ public class PlayerMovement : MonoBehaviour
 
 	public float walkSpeed = 12f;
 
-	public float runSpeed = 20f;
+    private float speedMultiplier = 1f;
+
+    public void ApplySpeedBoost(float amount)
+    {
+        speedMultiplier += amount;
+
+        Debug.Log("Speed boost applied! Multiplier: " + speedMultiplier);
+    }
+
+    public float runSpeed = 20f;
 
 	public float gravity = -9.81f;
 
@@ -64,7 +73,10 @@ public class PlayerMovement : MonoBehaviour
 		{
 			num = runSpeed;
 		}
-		controller.Move(vector * num * Time.deltaTime);
+
+        num *= speedMultiplier;
+
+        controller.Move(vector * num * Time.deltaTime);
 		float x = playerCamera.transform.localPosition.x;
 		float z = playerCamera.transform.localPosition.z;
 		float num2 = camY;

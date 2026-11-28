@@ -126,6 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
   autoStart: 0
-  enabledPickupDelay: 3
+  enabledPickupDelay: 0
   item: {fileID: 11400000, guid: 2ca40b0c3e8aa7f43ac2cbfb127c43b0, type: 2}
   pickedUp: 0

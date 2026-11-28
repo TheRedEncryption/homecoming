@@ -25,22 +25,64 @@ public class EnemyController : MonoBehaviour
 
 
     private NavMeshAgent _agent;
+    private float originalSpeed;
     private int _currentPatrolIndex;
     private bool _isWaiting;
     private EnemyState _state = EnemyState.Patrolling;
     private float _timeSinceLostPlayer;
     private float _stunTime = 0f;
-    private float _speed;
+    private float baseAggressionSpeed;
+    private float baseDetectionRange;
+    private float baseViewAngle;
+    private float baseLosePlayerTime;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _speed = _agent.speed;
+
+        originalSpeed = _agent.speed;
+
+        _agent.speed = originalSpeed *
+            EnemySlow.GlobalSpeedMultiplier;
+
+        UpdateEnemySpeed();
+
+        baseAggressionSpeed = _agent.speed;
+        baseDetectionRange = detectionRange;
+        baseViewAngle = viewAngle;
+        baseLosePlayerTime = losePlayerTime;
+
+        UpdateEnemyAggression();
+    }
+
+    public void UpdateEnemyAggression()
+    {
+        float multiplier =
+            EnemyAggression.AggressionMultiplier;
+
+        _agent.speed = baseAggressionSpeed * multiplier;
+
+        detectionRange = baseDetectionRange * multiplier;
+
+        viewAngle = Mathf.Min(
+            baseViewAngle * multiplier, 360f);
+
+        losePlayerTime = baseLosePlayerTime * multiplier;
+
+        Debug.Log("Enemy Aggression Updated!");
     }
 
     private void Start()
     {
         GoToNextPatrolPoint();
+    }
+
+    public void UpdateEnemySpeed()
+    {
+        if (_agent == null) return;
+
+        _agent.speed = originalSpeed *
+            EnemySlow.GlobalSpeedMultiplier;
     }
 
     private void Update()
@@ -82,7 +124,9 @@ public class EnemyController : MonoBehaviour
                 if (_stunTime < 0f)
                 {
                     _state = EnemyState.Patrolling;
-                    _agent.speed = _speed;
+                    _agent.speed = originalSpeed
+                        * EnemySlow.GlobalSpeedMultiplier
+                        * EnemyAggression.AggressionMultiplier;
                 }
                 else
                 {
@@ -161,7 +205,7 @@ public class EnemyController : MonoBehaviour
     private bool IsFacingPlayer()
     {
         var dirToPlayer = (player.position - transform.position).normalized;
-        var angle = Vector3.Angle(transform.position, dirToPlayer);
+        var angle = Vector3.Angle(transform.forward, dirToPlayer);
         return angle <= viewAngle / 2f;
     }
 

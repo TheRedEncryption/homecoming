@@ -72,7 +72,10 @@ public class Inventory : MonoBehaviour
     {
         var inventoryId = Guid.NewGuid().ToString();
         inventory.Add(inventoryId, item);
-        ui.AddUIItem(inventoryId, item);
+        if(ui != null)
+        {
+            ui.AddUIItem(inventoryId, item);
+        }
 
         switch (item.collectionEffect)
         {
